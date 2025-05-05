@@ -1,0 +1,266 @@
+/* General styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f4f4f9, #e0eaff);
+    padding: 20px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 400px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Headings */
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+form input,
+form input[type="datetime-local"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+}
+
+form button {
+    padding: 10px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Task list */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+li:hover {
+    background-color: #eef3ff;
+    transform: scale(1.02);
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+    background-color: #d4edda;
+}
+
+/* Buttons inside tasks */
+.task-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.task-buttons a {
+    text-decoration: none;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.complete-btn {
+    background-color: #28a745;
+}
+
+.complete-btn:hover {
+    background-color: #218838;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Due labels */
+.due-label {
+    font-size: 0.85em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.due-overdue {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.due-today {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.due-tomorrow {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.due-week {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+.due-later {
+    color: #6c757d;
+}
+
+/* Flash messages */
+.flash-message {
+    background-color: #28a745;
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    transition: opacity 0.5s ease-out;
+}
+
+.flash-message .error {
+    background-color: #dc3545;
+}
+
+/* Auth forms */
+.form-container {
+    background-color: #fff;
+    padding: 30px 25px;
+    border-radius: 8px;
+    width: 350px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    text-align: center;
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+}
+
+.form-container label {
+    display: block;
+    text-align: left;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-container a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.form-container a:hover {
+    text-decoration: underline;
+}
+
+/* Logout link */
+.logout-link {
+    display: block;
+    text-align: right;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+}
+
+.logout-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive layout */
+@media (max-width: 500px) {
+    body {
+        padding: 10px;
+        align-items: stretch;
+    }
+
+    .container,
+    .form-container {
+        width: 100%;
+        padding: 20px 15px;
+    }
+
+    form input,
+    form button {
+        font-size: 16px;
+    }
+
+    .task-buttons {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    li {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .logout-link {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+}
+
+.edit-btn {
+    background-color: #ffc107;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}

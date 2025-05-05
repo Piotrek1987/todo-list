@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Task</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Edit Task</h2>
+        <form method="POST">
+            <input type="text" name="title" value="{{ task.title }}" required>
+            <input type="datetime-local" name="due_date"
+                   value="{{ task.due_date.strftime('%Y-%m-%dT%H:%M') if task.due_date else '' }}">
+            <button type="submit">Save Changes</button>
+        </form>
+        <p style="margin-top: 15px;">
+            <a href="{{ url_for('home') }}">Back to tasks</a>
+        </p>
+    </div>
+</body>
+</html>

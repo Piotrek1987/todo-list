@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/home.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 8px;
+            width: 300px;
+            margin: 100px auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-message">
+      {% for category, message in messages %}
+        <p class="{{ category }}">{{ message }}</p>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+    <div class="container">
+    <h1>My Todo List</h1>
+    <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+
+    <form action="{{ url_for('add_task') }}" method="POST">
+        <input type="text" name="description" placeholder="New task" required>
+        <input type="datetime-local" name="due_date">
+        <button type="submit">Add Task</button>
+    </form>
+
+        <form method="GET" action="{{ url_for('home') }}">
+    <input type="text" name="search" placeholder="Search tasks...">
+    <button type="submit">Search</button>
+        </form>
+
+    <ul>
+    {% for task in tasks %}
+        <li class="{{ 'completed' if task.completed else '' }}">
+    {{ task.description }}
+
+    {% if task.due_date %}
+    <span style="font-size: 0.9em; color: gray;">
+        (Due: {{ task.due_date.strftime('%b %d, %Y %H:%M') }})
+    </span>
+
+    {% set delta_days = (task.due_date.date() - now.date()).days %}
+    {% if task.due_date < now %}
+        <span style="color: red; font-weight: bold;">[Overdue]</span>
+    {% elif delta_days == 0 %}
+        <span style="color: orange; font-weight: bold;">[Due Today]</span>
+    {% elif delta_days == 1 %}
+        <span style="color: goldenrod; font-weight: bold;">[Due Tomorrow]</span>
+    {% elif delta_days <= 7 %}
+        <span style="color: dodgerblue;">[Due This Week]</span>
+    {% else %}
+        <span style="color: gray;">[Due Later]</span>
+    {% endif %}
+{% else %}
+    <span style="font-size: 0.9em; color: #aaa;">(No due date)</span>
+{% endif %}
+
+
+
+            <div>
+                {% if not task.completed %}
+                    <a href="{{ url_for('complete_task', task_id=task.id) }}">✅ Complete</a>
+                {% endif %}
+                <a href="{{ url_for('edit_task', task_id=task.id) }}">✏️ Edit</a>
+                <a href="{{ url_for('delete_task', task_id=task.id) }}">🗑 Delete</a>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+
+
+</div>
+<script>
+    // Auto-hide flash messages after 3 seconds
+    setTimeout(() => {
+        const flash = document.querySelector('.flash-message');
+        if (flash) {
+            flash.style.opacity = '0';
+            setTimeout(() => flash.remove(), 500);
+        }
+    }, 3000);
+</script>
+
+</body>
+</html>
